@@ -141,9 +141,9 @@ static int need_check(int force) {
 }
 
 int main(int argc, char **argv) {
-    const char *usage = "Usage: %s [-m offsetsize] [-b blocksize] [-s superblock] [-D] [-V] device\n";
+    const char *usage = "Usage: %s [-b blocksize] [-s superblock] [-D] [-V] device\n";
     int c;
-    const char *opt_string = "iDVfb:s:m:";
+    const char *opt_string = "iDVfb:s:";
     int open_flags = EXT2_FLAG_SOFTSUPP_FEATURES | EXT2_FLAG_64BITS | EXT2_FLAG_THREADS | EXT2_FLAG_RW;
     blk64_t superblock = 0;
     int offset_size = 0;
@@ -152,9 +152,6 @@ int main(int argc, char **argv) {
 
     while ((c = getopt(argc, argv, opt_string)) != EOF) {
         switch (c) {
-        case 'm':
-            offset_size = (int)parse_unsigned(optarg, -1, argv[0], "Invalid offset size:", NULL);
-            break;
         case 'i':
             open_flags |= EXT2_FLAG_IMAGE_FILE;
             break;
